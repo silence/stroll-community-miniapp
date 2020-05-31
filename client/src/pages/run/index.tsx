@@ -43,6 +43,10 @@ export default () => {
       await Taro.authorize({ scope: "scope.werun" });
       setModalShow(false);
       await login();
+      const stepInfoList = await getWeRunData();
+      console.log(stepInfoList);
+      if (stepInfoList) setWeRunList(stepInfoList);
+      await uploadUserInfo();
     } catch (err) {
       console.log(err);
     }
