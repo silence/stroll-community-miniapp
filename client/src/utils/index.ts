@@ -54,6 +54,7 @@ export interface IWeRunRank {
   stepInfoList: IStepInfo[];
   totalSteps: number;
   userInfo: Taro.UserInfo;
+  _id: string;
 }
 export async function getWeRunRank(days: number, offset = 0, limit = 10) {
   try {
@@ -65,4 +66,16 @@ export async function getWeRunRank(days: number, offset = 0, limit = 10) {
   } catch (err) {
     console.log(err);
   }
+}
+/**
+ * 延迟执行函数
+ * @param fc 延迟执行函数
+ * @param time 延迟执行时间
+ */
+export async function sleep(fc: Function, time: number) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(fc());
+    }, time);
+  });
 }

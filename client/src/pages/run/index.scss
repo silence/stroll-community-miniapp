@@ -1,6 +1,206 @@
 @import "~taro-ui/dist/style/components/modal.scss";
-// @import '~taro-ui/dist/style/components/button.scss';
-// @import '~taro-ui/dist/style/components/loading.scss';
 @import "~taro-ui/dist/style/components/accordion.scss";
-@import "~taro-ui/dist/style/components/icon.scss";
-@import "~taro-ui/dist/style/components/list.scss";
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  background: url("../../static/Materials/Backgrounds/BKG2.png") no-repeat;
+  background-size: cover;
+  position: relative;
+  .run {
+    position: absolute;
+    top: 3.3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 37.5vw;
+    height: 37.5vw;
+  }
+  .text-content {
+    position: absolute;
+    top: 32.2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38.6vw;
+    height: 6.9vw;
+    .text {
+      font-family: PingFangSC-Regular;
+      font-size: 5vw;
+      color: #ffffff;
+    }
+  }
+  .health-content {
+    position: absolute;
+    top: 39.2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 91.7vw;
+    height: 35.1vh;
+    background-color: #ffffff;
+    border-radius: 2.8vw;
+    .energy-value {
+      width: 75vw;
+      height: 9.6vh;
+      margin: 2.8vw 5.6vw;
+      position: relative;
+      .text {
+        display: inline-block;
+        width: 15vw;
+        height: 6.9vw;
+        font-family: PingFangSC-Regular;
+        font-size: 5vw;
+        color: #6d6d6d;
+      }
+      .loading {
+        display: inline-block;
+        line-height: 6.9vw;
+        vertical-align: middle;
+        width: 56.7vw;
+        height: 2.2vw;
+        background-color: #f1f1f1;
+        border-radius: 1vw;
+        margin-left: 3.3vw;
+      }
+      .energy-loading {
+        position: absolute;
+        left: 18.3vw;
+        top: 3.1vw;
+        height: 2.2vw;
+        border-radius: 1vw;
+      }
+      .description {
+        width: 63.3vw;
+        height: 4.7vw;
+        font-family: PingFangSC-Regular;
+        font-size: 3.3vw;
+        color: #6d6d6d;
+        margin-top: 2.5vw;
+      }
+    }
+    .health-gold {
+      width: 80vw;
+      height: 6.9vw;
+      margin: 8.3vw 5.6vw;
+      display: flex;
+      justify-content: space-between;
+      .text {
+        width: 15vw;
+        height: 6.9vw;
+        font-family: PingFangSC-Regular;
+        font-size: 5vw;
+        color: #6d6d6d;
+      }
+      .health-value {
+        // width: 38.1vw;
+        height: 6.9vw;
+        font-family: PingFangSC-Regular;
+        font-size: 5vw;
+        color: #5d5d5d;
+      }
+    }
+    .get-gold {
+      width: 50vw;
+      height: 8.3vw;
+      line-height: 8.3vw;
+      background-color: #f5d45d;
+      border-radius: 4.2vw;
+      margin: 0 auto;
+      text-align: center;
+      color: #fff;
+      font-family: PingFangSC-Regular;
+      font-size: 4.4vw;
+    }
+  }
+  .energy-rank {
+    position: absolute;
+    top: 76.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 91.7vw;
+    height: 23.5vh;
+    background-color: #ffffff;
+    border-radius: 2.8vw 2.8vw 0 0;
+    .text {
+      margin: 1.9vw 36.9vw;
+      width: 17.8vw;
+      height: 6.1vw;
+      font-family: PingFangSC-Regular;
+      font-size: 4.4vw;
+      color: #6d6d6d;
+    }
+    .wrapper {
+      height: 20.3vw;
+      position: absolute;
+      bottom: 2.2vw;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      .left-box {
+        width: 15.1vw;
+        height: 17.5vw;
+        position: relative;
+        .top {
+          width: 13.9vw;
+          height: 13.9vw;
+          border: solid 0.6vw #acb3b9;
+          border-radius: 13.9vw;
+          background-size: cover;
+        }
+        .bottom {
+          position: absolute;
+          width: 7.5vw;
+          height: 7.5vw;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url("../../static/Materials/Ranking/Silver.png") no-repeat;
+          background-size: cover;
+        }
+      }
+      .middle-box {
+        width: 16.5vw;
+        height: 20.3vw;
+        position: relative;
+        .top {
+          width: 15.3vw;
+          height: 15.3vw;
+          border: solid 0.6vw #ecac2f;
+          border-radius: 15.3vw;
+          background-size: cover;
+        }
+        .bottom {
+          position: absolute;
+          width: 8.3vw;
+          height: 8.3vw;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url("../../static/Materials/Ranking/Gold.png") no-repeat;
+          background-size: cover;
+        }
+      }
+      .right-box {
+        width: 15.1vw;
+        height: 17.5vw;
+        position: relative;
+        .top {
+          width: 13.9vw;
+          height: 13.9vw;
+          border: solid 0.6vw #ffbb5d;
+          border-radius: 13.9vw;
+          background-size: cover;
+        }
+        .bottom {
+          position: absolute;
+          width: 7.5vw;
+          height: 7.5vw;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          background: url("../../static/Materials/Ranking/Bronze.png") no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}

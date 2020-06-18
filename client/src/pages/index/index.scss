@@ -1,0 +1,69 @@
+.content {
+  width: 100vw;
+  height: 100vh;
+  background: url("../../static/Materials/Backgrounds/BKG.png") no-repeat;
+  background-size: cover;
+  position: relative;
+  .grey-bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: #0000004d;
+  }
+  .wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    .welcome {
+      text-align: center;
+      height: 23vh;
+      width: 100vw;
+      .text {
+        position: relative;
+        font-size: 8vw;
+        color: #fff;
+        font-family: PingFangSC-Regular;
+        top: 11vh;
+      }
+    }
+    .logo {
+      width: 38vh;
+      height: 12vh;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .text-wrapper {
+      margin-top: 11vh;
+      padding: 6vw;
+      width: 88vw;
+      height: 26vh;
+      color: #eeeeee;
+      position: relative;
+      .intro {
+        font-family: PingFangSC-Light;
+        font-size: 4vh;
+        .intro-text {
+          margin: 1vh;
+        }
+      }
+      .name {
+        position: absolute;
+        bottom: 6vw;
+        right: 6vw;
+        font-family: PingFangSC-Light;
+        font-size: 3vh;
+      }
+    }
+    .support {
+      position: absolute;
+      font-family: PingFangSC-Regular;
+      font-size: 2.5vh;
+      color: #eeeeee;
+      bottom: 4vh;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
