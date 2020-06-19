@@ -1,5 +1,9 @@
 import Taro from "@tarojs/taro";
 
+/**
+ * 登陆函数
+ * 设置 {openId: xxx} 到storage里
+ */
 export async function login() {
   try {
     const { result } = <Record<string, any>>await Taro.cloud.callFunction({
@@ -19,6 +23,10 @@ export interface IStepInfo {
   step: number;
   timestamp: number;
 }
+
+/**
+ * 获取用户过去30天的运动步数
+ */
 export async function getWeRunData() {
   try {
     const { cloudID } = await Taro.getWeRunData();
@@ -34,6 +42,10 @@ export async function getWeRunData() {
   }
 }
 
+/**
+ * 上传用户信息
+ * 上传成功会设置 {isUserInfoUploaded: true} 到 storage
+ */
 export async function uploadUserInfo() {
   try {
     const { userInfo } = await Taro.getUserInfo();
@@ -56,6 +68,13 @@ export interface IWeRunRank {
   userInfo: Taro.UserInfo;
   _id: string;
 }
+
+/**
+ * 获取过去几天的步数排行榜
+ * @param days 过去的天数
+ * @param offset 偏移值
+ * @param limit 限制条数
+ */
 export async function getWeRunRank(days: number, offset = 0, limit = 10) {
   try {
     const { result } = <Record<string, any>>await Taro.cloud.callFunction({
@@ -67,10 +86,11 @@ export async function getWeRunRank(days: number, offset = 0, limit = 10) {
     console.log(err);
   }
 }
+
 /**
  * 延迟执行函数
  * @param fc 延迟执行函数
- * @param time 延迟执行时间
+ * @param time 延迟执行时间 ms
  */
 export async function sleep(fc: Function, time: number) {
   return new Promise(resolve => {

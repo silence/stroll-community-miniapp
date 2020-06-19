@@ -22,7 +22,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "漫步社区",
+      navigationBarTitleText: "漫步街区",
       navigationBarTextStyle: "black"
     },
     permission: {

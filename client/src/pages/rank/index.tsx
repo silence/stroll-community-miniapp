@@ -1,8 +1,8 @@
 import Taro, { useDidShow, useState } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { getWeRunRank, IWeRunRank } from "@/utils";
-import "./index.scss";
 import TableRank from "@/components/table-rank";
+import "./index.scss";
 
 export default () => {
   const [rankList, setRankList] = useState<IWeRunRank[]>([]);
@@ -18,17 +18,3 @@ export default () => {
     </View>
   );
 };
-
-/* <AtList hasBorder={false}>
-        {rankList.map(el => {
-          return (
-            <AtListItem
-              thumb={el.userInfo.avatarUrl}
-              note={el.userInfo.city}
-              title={el.userInfo.nickName}
-              extraText={el.totalSteps.toString()}
-              key={el.userInfo.avatarUrl}
-            />
-          );
-        })}
-      </AtList> */

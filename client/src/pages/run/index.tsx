@@ -12,10 +12,11 @@ import {
 import "./index.scss";
 
 export default () => {
+  // Modal是否展示
   const [isModalShow, setModalShow] = useState(false);
+  //
   const [weRunList, setWeRunList] = useState<IStepInfo[]>([]);
   const [rankList, setRankList] = useState<IWeRunRank[]>([]);
-  // const [avatarUrls, setAvatarUrls] = useState<string[]>([]);
   useLayoutEffect(() => {
     Taro.navigateTo({ url: "../index/index" });
   }, []);
@@ -100,28 +101,6 @@ export default () => {
           </Button>
         </AtModalAction>
       </AtModal>
-      {/* <AtAccordion
-        title="近1个月的步数"
-        icon={{ value: "chevron-down", color: "red", size: "15" }}
-        open={isOpen}
-        onClick={() => setOpen(!isOpen)}
-      >
-        <View style={{ maxHeight: "200px", overflow: "scroll" }}>
-          <AtList hasBorder={false}>
-            {weRunList.map(value => {
-              return (
-                <AtListItem
-                  title={`运动步数 ${value.step}`}
-                  extraText={new Date(
-                    value.timestamp * 1000
-                  ).toLocaleDateString()}
-                  key={value.timestamp}
-                />
-              );
-            })}
-          </AtList>
-        </View>
-      </AtAccordion> */}
       <View className="run-content">
         <Image
           src="../../static/Materials/ezgif.com-optimize.gif"
@@ -180,7 +159,6 @@ export default () => {
           </View>
         </View>
       </View>
-
       <View style={{ textAlign: "center", color: "#fff" }}>
         <Text>今日步数: {weRunList[weRunList.length - 1].step}</Text>
       </View>

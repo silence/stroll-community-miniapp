@@ -36,6 +36,16 @@ const config = {
     ]
   },
   defineConstants: {},
+  copy: {
+    patterns: [
+      { from: "src/static/", to: "dist/static/" },
+      {
+        from: "src/sitemap.json",
+        to: "dist/sitemap.json"
+      }
+    ],
+    options: {}
+  },
   alias: {
     "@": path.resolve(__dirname, "..", "src")
   },
