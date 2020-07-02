@@ -17,15 +17,16 @@
   }
   .text-content {
     position: absolute;
-    top: 32.2vh;
+    top: 29vh;
     left: 50%;
     transform: translateX(-50%);
-    width: 38.6vw;
-    height: 6.9vw;
+    width: 100%;
+    height: 50rpx;
+    text-align: center;
+    color: #ffffff;
     .text {
       font-family: PingFangSC-Regular;
       font-size: 5vw;
-      color: #ffffff;
     }
   }
   .health-content {
@@ -44,7 +45,7 @@
       position: relative;
       .text {
         display: inline-block;
-        width: 15vw;
+        // width: 15vw;
         height: 6.9vw;
         font-family: PingFangSC-Regular;
         font-size: 5vw;
@@ -68,7 +69,7 @@
         border-radius: 1vw;
       }
       .description {
-        width: 63.3vw;
+        // width: 63.3vw;
         height: 4.7vw;
         font-family: PingFangSC-Regular;
         font-size: 3.3vw;
@@ -83,7 +84,7 @@
       display: flex;
       justify-content: space-between;
       .text {
-        width: 15vw;
+        // width: 15vw;
         height: 6.9vw;
         font-family: PingFangSC-Regular;
         font-size: 5vw;
@@ -121,7 +122,7 @@
     border-radius: 2.8vw 2.8vw 0 0;
     .text {
       margin: 1.9vw 36.9vw;
-      width: 17.8vw;
+      // width: 17.8vw;
       height: 6.1vw;
       font-family: PingFangSC-Regular;
       font-size: 4.4vw;

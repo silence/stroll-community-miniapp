@@ -14,12 +14,15 @@ import "./index.scss";
 export default () => {
   // Modal是否展示
   const [isModalShow, setModalShow] = useState(false);
-  //
+  // 过去30天的运动步数
   const [weRunList, setWeRunList] = useState<IStepInfo[]>([]);
+  // 过去天数运动步数总排名
   const [rankList, setRankList] = useState<IWeRunRank[]>([]);
+  // 因为tab页必须先挂载，所以挂载后再跳转到展示页
   useLayoutEffect(() => {
     Taro.navigateTo({ url: "../index/index" });
   }, []);
+
   // @ts-ignore
   useEffect(async () => {
     const setting = await Taro.getSetting();
@@ -30,10 +33,10 @@ export default () => {
       setting.authSetting["scope.userInfo"]
     ) {
       const isLogin = await Taro.getStorage({ key: "openId" });
-      console.log(isLogin);
+      console.log("isLogin", isLogin);
       if (!isLogin) await login();
       const stepInfoList = await getWeRunData();
-      console.log(stepInfoList);
+      console.log("stepInfoList", stepInfoList);
       if (stepInfoList) setWeRunList(stepInfoList);
       const res = await getWeRunRank(30, 0, 3);
       console.log(res);
@@ -53,7 +56,7 @@ export default () => {
       setModalShow(false);
       await login();
       const stepInfoList = await getWeRunData();
-      console.log(stepInfoList);
+      console.log("stepInfoList", stepInfoList);
       if (stepInfoList) setWeRunList(stepInfoList);
       await uploadUserInfo();
     } catch (err) {
@@ -65,7 +68,7 @@ export default () => {
     avatarUrls = rankList.map(el => el.userInfo.avatarUrl);
   }
 
-  console.log(avatarUrls);
+  console.log("avatarUrls", avatarUrls);
   let todayRunStep = 0;
   if (weRunList.length !== 0) {
     todayRunStep = weRunList[weRunList.length - 1].step;
@@ -108,6 +111,9 @@ export default () => {
         ></Image>
       </View>
       <View className="text-content">
+        <View>
+          <Text>今日步数: {weRunList[weRunList.length - 1].step}</Text>
+        </View>
         <View className="text">No surprise 原则</View>
       </View>
       <View className="health-content">
@@ -158,9 +164,6 @@ export default () => {
             <View className="bottom"></View>
           </View>
         </View>
-      </View>
-      <View style={{ textAlign: "center", color: "#fff" }}>
-        <Text>今日步数: {weRunList[weRunList.length - 1].step}</Text>
       </View>
     </View>
   );

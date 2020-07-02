@@ -13,8 +13,6 @@ export default () => {
   });
   console.log(rankList);
   return (
-    <View>
-      <TableRank rankList={rankList} />
-    </View>
+    <View>{rankList.length !== 0 && <TableRank rankList={rankList} />}</View>
   );
 };
