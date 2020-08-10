@@ -35,6 +35,7 @@ const config = {
       ]
     ]
   },
+  plugins: ["@tarojs/plugin-sass", "@tarojs/plugin-terser"],
   defineConstants: {},
   copy: {
     patterns: [

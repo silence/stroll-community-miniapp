@@ -19,9 +19,9 @@ export default () => {
   // 过去天数运动步数总排名
   const [rankList, setRankList] = useState<IWeRunRank[]>([]);
   // 因为tab页必须先挂载，所以挂载后再跳转到展示页
-  useLayoutEffect(() => {
-    Taro.navigateTo({ url: "../index/index" });
-  }, []);
+  // useLayoutEffect(() => {
+  //   Taro.navigateTo({ url: "../index/index" });
+  // }, []);
 
   // @ts-ignore
   useEffect(async () => {
@@ -67,6 +67,8 @@ export default () => {
   if (rankList.length !== 0) {
     avatarUrls = rankList.map(el => el.userInfo.avatarUrl);
   }
+  if (avatarUrls.length < 3)
+    avatarUrls = [...avatarUrls, ...Array(3 - avatarUrls.length).fill("")];
 
   console.log("avatarUrls", avatarUrls);
   let todayRunStep = 0;
