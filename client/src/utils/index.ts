@@ -43,6 +43,42 @@ export async function getWeRunData() {
 }
 
 /**
+ * 获取用户的手机号信息
+ */
+export async function getPhoneNumber({ cloudID }) {
+  try {
+    const { result } = <any>await Taro.cloud.callFunction({
+      name: "getPhoneNum",
+      data: {
+        phoneNumber: wx.cloud.CloudID(cloudID)
+      }
+    });
+    console.log("cloud->getPhoneNum", result);
+    return result.phoneNumber as string;
+  } catch (err) {
+    console.log(err);
+  }
+}
+/**
+ * 上传用户真实信息
+ * @param realUserInfo 包含姓名、身份证号、手机号
+ */
+export async function uploadRealUserInfo(realUserInfo) {
+  try {
+    await Taro.cloud.callFunction({
+      name: "uploadRealUserInfo",
+      data: { realUserInfo }
+    });
+    await Taro.setStorage({
+      key: "isRealUserInfoUploaded",
+      data: true
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+/**
  * 上传用户信息
  * 上传成功会设置 {isUserInfoUploaded: true} 到 storage
  */

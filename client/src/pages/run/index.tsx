@@ -139,7 +139,18 @@ export default () => {
             {(todayRunStep / 10000).toFixed(2)}
           </View>
         </View>
-        <View className="get-gold">获取健康金</View>
+        <View
+          className="get-gold"
+          onClick={() => {
+            if (Taro.getStorageSync("isRealUserInfoUploaded")) {
+              // xxx 已经上传过真实信息了
+            } else {
+              Taro.navigateTo({ url: "../withdraw/index" });
+            }
+          }}
+        >
+          获取健康金
+        </View>
       </View>
       <View className="energy-rank">
         <View className="text">活力榜单</View>
