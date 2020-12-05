@@ -39,8 +39,8 @@ export default (props: IProps) => {
           <View
             className="avatar"
             style={{
-              backgroundImage: `url(${selfInfo.userInfo &&
-                selfInfo.userInfo.avatarUrl})`,
+              background: `url(${selfInfo.userInfo &&
+                selfInfo.userInfo.avatarUrl}) no-repeat`,
               backgroundSize: "cover"
             }}
           ></View>
@@ -55,33 +55,15 @@ export default (props: IProps) => {
             <View
               className="table-cell"
               style={{
-                marginTop: index === 0 ? "29rpx" : 0,
+                marginTop: index === 0 ? "27rpx" : 0,
                 backgroundColor: index % 2 === 0 ? "#efefef" : "#ffffff"
               }}
             >
-              <View
-                className="left"
-                style={{
-                  backgroundImage: (value => {
-                    switch (value) {
-                      case 1:
-                        return `url('../../static/Materials/Ranking/Gold.png')`;
-                      case 2:
-                        return `url('../../static/Materials/Ranking/Silver.png')`;
-                      case 3:
-                        return `url('../../static/Materials/Ranking/Bronze.png')`;
-                      default:
-                        return "";
-                    }
-                  })(index + 1)
-                }}
-              >
-                {index === 0 || index === 1 || index === 2 ? null : index + 1}
-              </View>
+              <View className="left">{index + 1}</View>
               <View
                 className="avatar"
                 style={{
-                  backgroundImage: `url(${el.userInfo.avatarUrl})`,
+                  background: `url(${el.userInfo.avatarUrl}) no-repeat`,
                   backgroundSize: "cover"
                 }}
               ></View>

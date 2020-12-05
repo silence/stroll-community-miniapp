@@ -16,13 +16,7 @@ export default () => {
         <View className="welcome">
           <View className="text">欢迎您来到</View>
         </View>
-        <View
-          style={{
-            backgroundImage: `url('../../static/Materials/logo.png')`,
-            backgroundSize: "cover"
-          }}
-          className="logo"
-        ></View>
+        <View className="logo"></View>
         <View className="text-wrapper">
           <View className="intro">
             <View className="intro-text">世界上本没有路，</View>

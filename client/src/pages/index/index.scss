@@ -28,11 +28,13 @@
       }
     }
     .logo {
+      background: url("../../static/Materials/logo.png") no-repeat;
       width: 38vh;
       height: 12vh;
       position: relative;
       left: 50%;
       transform: translateX(-50%);
+      background-size: cover;
     }
     .text-wrapper {
       margin-top: 11vh;

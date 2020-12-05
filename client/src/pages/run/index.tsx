@@ -44,19 +44,26 @@ export default () => {
       setting.authSetting["scope.werun"] &&
       setting.authSetting["scope.userInfo"]
     ) {
-      const isLogin = await Taro.getStorage({ key: "openId" });
-      console.log("isLogin", isLogin);
-      if (!isLogin) await login();
+      try {
+        const isLogin = Taro.getStorageSync("openId");
+        console.log("isLogin", isLogin);
+        if (!isLogin) await login();
+      } catch (err) {
+        console.log("err", err);
+      }
       const stepInfoList = await getWeRunData();
       console.log("stepInfoList", stepInfoList);
       if (stepInfoList) setWeRunList(stepInfoList);
       const res = await getWeRunRank(30, 0, 3);
       console.log("weRunRank", res);
       if (res) setRankList(res);
-      const isUserInfoUploaded = await Taro.getStorage({
-        key: "isUserInfoUploaded"
-      });
-      if (!isUserInfoUploaded) await uploadUserInfo();
+      try {
+        const isUserInfoUploaded = Taro.getStorageSync("isUserInfoUploaded");
+        console.log("isUserInfoUploaded", isUserInfoUploaded);
+        if (!isUserInfoUploaded) await uploadUserInfo();
+      } catch (err) {
+        console.log("err", err);
+      }
     } else {
       setModalShow(true);
     }
@@ -131,14 +138,15 @@ export default () => {
       <View className="health-content">
         <View className="energy-value">
           <View className="text">活力值</View>
-          <View className="loading"></View>
-          <View
-            className="energy-loading"
-            style={{
-              width: `${(56.7 * todayRunStep) / 25000}vw`,
-              backgroundColor: loadingBG
-            }}
-          ></View>
+          <View className="loading">
+            <View
+              className="energy-loading"
+              style={{
+                width: `${(56.7 * todayRunStep) / 25000}vw`,
+                backgroundColor: loadingBG
+              }}
+            ></View>
+          </View>
           <View className="description">
             活力值说明：当达到一定活力值会有健康金
           </View>

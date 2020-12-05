@@ -55,7 +55,7 @@
         color: #6d6d6d;
       }
       .loading {
-        display: inline-block;
+        display: inline-flex;
         line-height: 6.9vw;
         vertical-align: middle;
         width: 56.7vw;
@@ -63,13 +63,11 @@
         background-color: #f1f1f1;
         border-radius: 1vw;
         margin-left: 3.3vw;
-      }
-      .energy-loading {
-        position: absolute;
-        left: 18.3vw;
-        top: 3.1vw;
-        height: 2.2vw;
-        border-radius: 1vw;
+        align-items: center;
+        .energy-loading {
+          height: 2.2vw;
+          border-radius: 1vw;
+        }
       }
       .description {
         // width: 63.3vw;
