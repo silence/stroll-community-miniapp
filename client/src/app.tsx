@@ -19,10 +19,10 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      "pages/withdraw/index",
       "pages/run/index",
       "pages/rank/index",
-      "pages/index/index"
+      "pages/index/index",
+      "pages/withdraw/index"
     ],
     window: {
       backgroundTextStyle: "light",

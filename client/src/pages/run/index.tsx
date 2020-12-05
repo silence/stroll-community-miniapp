@@ -1,15 +1,18 @@
 import Taro, { useState, useLayoutEffect, useEffect } from "@tarojs/taro";
 import { Button, View, Text, Image } from "@tarojs/components";
-import { AtModal, AtModalContent, AtModalAction } from "taro-ui";
+import { AtModal, AtModalContent, AtModalAction, AtMessage } from "taro-ui";
 import {
   login,
   getWeRunData,
   uploadUserInfo,
   IStepInfo,
   getWeRunRank,
-  IWeRunRank
+  IWeRunRank,
+  paramsSortStr,
+  withdraw
 } from "@/utils";
 import "./index.scss";
+import * as md5 from "md5";
 
 export default () => {
   // Modal是否展示
@@ -96,6 +99,7 @@ export default () => {
 
   return (
     <View className="content">
+      <AtMessage />
       <AtModal isOpened={isModalShow} closeOnClickOverlay={false}>
         <AtModalContent>
           使用小程序必须要获取所需要的权限，否则无法使用哦~
@@ -141,15 +145,69 @@ export default () => {
         </View>
         <View
           className="get-gold"
-          onClick={() => {
+          onClick={async () => {
             if (Taro.getStorageSync("isRealUserInfoUploaded")) {
               // xxx 已经上传过真实信息了
+              //   const partner_trade_no = "55af1e37073446d8b070a1e42e4fc392";
+              //   console.log("partner_trade_no", partner_trade_no);
+              //   const params: any = {
+              //     mch_appid: "wx07e215ec1bc4d367",
+              //     mchid: "1601554950",
+              //     nonce_str: "5K8264ILTKCH16CQ2502SI8ZNMTM67VS", // 随机字符串
+              //     // sign: "", // 签名
+              //     partner_trade_no: partner_trade_no,
+              //     // "10000098201411111234567897", // 唯一性字符串
+              //     openid: "o6TTO4iy58YuL6RuKt4kP7xa2E10", // 用户openid
+              //     check_name: "FORCE_CHECK",
+              //     re_user_name: "刘泽章",
+              //     amount: 30,
+              //     desc: "漫步街区健康金"
+              //   };
+              //   const stringA = paramsSortStr(params);
+              //   const stringSignTemp =
+              //     //注：key为商户平台设置的密钥key
+              //     stringA + "&key=4402210009100420693lx13551250451";
+              //   console.log("stringSignTemp", stringSignTemp);
+              //   const sign = md5(stringSignTemp).toUpperCase(); //注：MD5签名方式
+              //   console.log("sign", sign);
+              //   params.sign = sign;
+              //   const res = await Taro.request({
+              //     url:
+              //       "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers",
+              //     data: `<xml>
+              //     <mch_appid>wx07e215ec1bc4d367</mch_appid>
+              //     <mchid>1601554950</mchid>
+              //     <nonce_str>5K8264ILTKCH16CQ2502SI8ZNMTM67VS</nonce_str>
+              //     <partner_trade_no>${partner_trade_no}</partner_trade_no>
+              //     <openid>o6TTO4iy58YuL6RuKt4kP7xa2E10</openid>
+              //     <check_name>FORCE_CHECK</check_name>
+              //     <re_user_name>刘泽章</re_user_name>
+              //     <amount>30</amount>
+              //     <desc>漫步街区健康金</desc>
+              //     <sign>${sign}</sign>
+              // </xml>`,
+              //     method: "POST",
+              //     header: { "content-type": "text/xml; charset=UTF-8" }
+              //   });
+              //   console.log("res", res);
+
+              // Number((todayRunStep / 10000).toFixed(2));
+              const amount = 0.4;
+              if (amount < 0.3) {
+                Taro.atMessage({
+                  message: "健康金不足0.3元无法提现",
+                  type: "warning"
+                });
+              } else {
+                const res: any = await withdraw(amount);
+                console.log("withdraw res", res.result);
+              }
             } else {
               Taro.navigateTo({ url: "../withdraw/index" });
             }
           }}
         >
-          获取健康金
+          提取健康金
         </View>
       </View>
       <View className="energy-rank">

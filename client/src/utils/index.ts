@@ -98,6 +98,23 @@ export async function uploadUserInfo() {
   }
 }
 
+/**
+ * 请求提现健康金云函数
+ * @param amount 单位：元
+ */
+export async function withdraw(amount: number) {
+  try {
+    return await Taro.cloud.callFunction({
+      name: "withdraw",
+      data: {
+        // 单位：分
+        amount: amount * 100
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 export interface IWeRunRank {
   stepInfoList: IStepInfo[];
   totalSteps: number;
@@ -134,4 +151,18 @@ export async function sleep(fc: Function, time: number) {
       resolve(fc());
     }, time);
   });
+}
+
+/**
+ * 将请求参数按ascii码从小到大排序生成序列字符串
+ * @param params 请求的参数
+ * @see https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=4_3
+ */
+export function paramsSortStr(params: Record<string, any>) {
+  const sortedKeysList = Object.keys(params).sort();
+  let str = "";
+  sortedKeysList.forEach(key => {
+    str += `&${key}=${String(params[key])}`;
+  });
+  return str.slice(1);
 }

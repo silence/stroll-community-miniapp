@@ -1,36 +1,16 @@
-import Taro, { useEffect, useState } from "@tarojs/taro";
+import Taro, { useEffect } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtModal } from "taro-ui";
 import { sleep } from "@/utils";
 import "./index.scss";
 
 export default () => {
-  // 首页介绍modal是否打开
-  const [isOpened, setIsOpened] = useState(false);
   useEffect(() => {
-    const isIntro: true | "" = Taro.getStorageSync("isIntro");
-    if (isIntro !== "") {
-      setIsOpened(() => false);
-      (async () => await sleep(() => Taro.navigateBack({ delta: 1 }), 3000))();
-    } else {
-      setIsOpened(() => true);
-    }
-  }, [isOpened]);
+    sleep(() => {
+      Taro.navigateBack({ delta: 1 });
+    }, 3000);
+  }, []);
   return (
     <View className="content">
-      <AtModal
-        isOpened={isOpened}
-        closeOnClickOverlay={false}
-        title="活动介绍"
-        confirmText="确认"
-        onConfirm={() => {
-          Taro.setStorageSync("isIntro", true);
-          setIsOpened(() => false);
-        }}
-        content="这里是活动介绍内容，欢迎来到漫步街区小程序
-        这里是活动介绍内容，欢迎来到漫步街区小程序
-        这里是活动介绍内容，欢迎来到漫步街区小程序"
-      />
       <View className="grey-bg"></View>
       <View className="wrapper">
         <View className="welcome">
