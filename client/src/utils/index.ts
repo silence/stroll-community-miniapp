@@ -10,7 +10,7 @@ export async function login() {
       name: "getOpenId",
       data: {}
     });
-    return await Taro.setStorage({
+    await Taro.setStorage({
       key: "openId",
       data: result.openId
     });
@@ -39,6 +39,7 @@ export async function getWeRunData() {
     return result.stepInfoList as IStepInfo[];
   } catch (err) {
     console.log(err);
+    return [];
   }
 }
 
@@ -57,10 +58,12 @@ export async function getPhoneNumber({ cloudID }) {
     return result.phoneNumber as string;
   } catch (err) {
     console.log(err);
+    return "";
   }
 }
 /**
  * 上传用户真实信息
+ * 上传成功会设置 {isRealUserInfoUploaded: true} 到 storage
  * @param realUserInfo 包含姓名、身份证号、手机号
  */
 export async function uploadRealUserInfo(realUserInfo) {
@@ -89,7 +92,7 @@ export async function uploadUserInfo() {
       name: "uploadUserInfo",
       data: { userInfo }
     });
-    return await Taro.setStorage({
+    await Taro.setStorage({
       key: "isUserInfoUploaded",
       data: true
     });
@@ -113,6 +116,7 @@ export async function withdraw(amount: number) {
     });
   } catch (err) {
     console.log(err);
+    return {};
   }
 }
 export interface IWeRunRank {
@@ -137,6 +141,7 @@ export async function getWeRunRank(days: number, offset = 0, limit = 10) {
     return result as IWeRunRank[];
   } catch (err) {
     console.log(err);
+    return [];
   }
 }
 
@@ -151,18 +156,4 @@ export async function sleep(fc: Function, time: number) {
       resolve(fc());
     }, time);
   });
-}
-
-/**
- * 将请求参数按ascii码从小到大排序生成序列字符串
- * @param params 请求的参数
- * @see https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=4_3
- */
-export function paramsSortStr(params: Record<string, any>) {
-  const sortedKeysList = Object.keys(params).sort();
-  let str = "";
-  sortedKeysList.forEach(key => {
-    str += `&${key}=${String(params[key])}`;
-  });
-  return str.slice(1);
 }

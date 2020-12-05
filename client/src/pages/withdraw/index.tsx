@@ -1,8 +1,15 @@
 import Taro, { useState } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtForm, AtInput, AtButton, AtModal, AtToast } from "taro-ui";
+import {
+  AtForm,
+  AtInput,
+  AtButton,
+  AtModal,
+  AtToast,
+  AtMessage
+} from "taro-ui";
 import "./index.scss";
-import { getPhoneNumber, uploadRealUserInfo } from "@/utils";
+import { getPhoneNumber, sleep, uploadRealUserInfo } from "@/utils";
 
 export default () => {
   const [name, setName] = useState("");
@@ -11,7 +18,8 @@ export default () => {
   const [isModalShow, setModalShow] = useState(true);
   const [isToastShow, setToastShow] = useState(false);
   const [toastText, setToastText] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [phoneLoading, setPhoneLoading] = useState(false);
 
   return (
     <View>
@@ -50,14 +58,21 @@ export default () => {
             setToastShow(true);
             return;
           }
-          setLoading(true);
+          setSubmitLoading(true);
           setToastShow(false);
           await uploadRealUserInfo({
             name,
             cardId,
             phoneNum
           });
-          setLoading(false);
+          Taro.atMessage({
+            message: "提交成功",
+            type: "success"
+          });
+          await sleep(() => {
+            Taro.navigateBack({ delta: 1 });
+          }, 3000);
+          setSubmitLoading(false);
         }}
         onReset={() => {
           setName("");
@@ -98,22 +113,26 @@ export default () => {
         >
           <AtButton
             openType="getPhoneNumber"
+            loading={phoneLoading}
             onGetPhoneNumber={async ev => {
               console.log("getPhoneNumberRes", ev);
+              setPhoneLoading(true);
               const phoneNumber = await getPhoneNumber(ev.detail as any);
               setPhoneNum(phoneNumber as string);
+              setPhoneLoading(false);
             }}
           >
             获取手机号码
           </AtButton>
         </AtInput>
         <View className="form-control">
-          <AtButton formType="submit" type="primary" loading={loading}>
+          <AtButton formType="submit" type="primary" loading={submitLoading}>
             提交
           </AtButton>
           <AtButton formType="reset">重置</AtButton>
         </View>
       </AtForm>
+      <AtMessage />
     </View>
   );
 };
